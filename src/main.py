@@ -13,7 +13,10 @@ def main():
     # Получение последних пяти операций
     operations_last_five = operations_with_from[0:5]
 
-    # Вывоз данный по операции в требуемом формате
+    # Вызов данных по операции в требуемом формате
+    # 14.10.2018 Перевод организации
+    # Visa Platinum 7000 79 ** ** ** 6361 -> Счет ** 9638
+    # 82771.72 руб.
     for operation in operations_last_five:
         date = change_format_date(operation['date'])
         print(f"{date} {operation['description']}")
