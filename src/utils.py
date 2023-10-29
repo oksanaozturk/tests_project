@@ -1,25 +1,27 @@
 import json
-from datetime import date
 
 
 def get_data(filename: str) -> list:
-    """Функцмя, получающая первоначальный список всех операций для фильтрации"""
-
+    """
+    Функцмя, получающая первоначальный список всех операций для фильтрации
+    """
     with open(filename, 'r', encoding='UTF-8') as file:
         data = json.load(file)
         return data
 
 
-def get_operations_executed(data) -> list:
+def get_filter_sorted_operations(data: list) -> list:
     """
     Функция, которая выбирает из списка выполненных операций только операции
-    в статусе 'EXECUTED
+    в статусе 'EXECUTED с дальнейшей сортировкой этого списка по дате, начиная с самой последней
     """
     operations_executed = []
     for operation in data:
         if 'state' in operation and operation['state'] == 'EXECUTED':
             operations_executed.append(operation)
-    return operations_executed
+
+    operations_sorted = sorted(operations_executed, key=lambda operation: operation['date'], reverse=True)
+    return operations_sorted
 
 
 def change_format_date(date: str) -> str:
@@ -50,19 +52,29 @@ def change_account_or_card_format(data_of_numbers: str) -> str:
     """
     if "Счет" in data_of_numbers:
         num_chek = data_of_numbers.split(' ')[1]
-        return f"** {num_chek[-4:]}"
+        name_chek = data_of_numbers.split(' ')[0]
+        return f"{name_chek} ** {num_chek[-4:]}"
+
+    elif "Visa" in data_of_numbers:
+        num_cart = data_of_numbers.split(' ')[-1]
+        name_cart = data_of_numbers.split(' ')[0:-1]
+        full_name_cart = " ".join(name_cart)
+        return f"{full_name_cart} {num_cart[0:4]} {num_cart[5:7]}** **** {num_cart[-4:]}"
+
     else:
         num_cart = data_of_numbers.split(' ')[1]
-        return f"{num_cart[0:5] } {num_cart[5:7]}** **** {num_cart[-4:]}"
+        name_cart = data_of_numbers.split(' ')[0]
+        return f"{name_cart} {num_cart[0:4] } {num_cart[5:7]}** **** {num_cart[-4:]}"
 
 
 if __name__ == '__main__':
     filename = 'operations.json'
     print(get_data(filename))
-    print(get_operations_executed(get_data(filename)))
+    print(get_filter_sorted_operations(get_data(filename)))
     print(len(get_data(filename)))
-    print(len(get_operations_executed(get_data(filename))))
+    print(len(get_filter_sorted_operations(get_data(filename))))
     print(change_format_date("2019-08-26T10:50:58.294041"))
     print(change_account_or_card_format("Счет 64686473678894779589"))
     print(change_account_or_card_format("MasterCard 7158300734726758"))
-
+    print(change_account_or_card_format("Visa Platinum 1246377376343588"))
+    print(change_account_or_card_format("Maestro 3928549031574026"))
