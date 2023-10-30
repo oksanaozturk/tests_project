@@ -7,7 +7,7 @@ def test_operations_fixture():
         {
             "id": 863064926,
             "state": "EXECUTED",
-            "date": "2019-12-08T22:46:21.935582",
+            "date": "2018-12-08T22:46:21.935582",
             "operationAmount": {
                 "amount": "41096.24",
                 "currency": {
@@ -21,7 +21,7 @@ def test_operations_fixture():
         {
             "id": 594226727,
             "state": "CANCELED",
-            "date": "2023-09-12T21:27:25.241689",
+            "date": "2019-09-12T21:27:25.241689",
             "operationAmount": {
                 "amount": "67314.70",
                 "currency": {
@@ -51,7 +51,7 @@ def test_operations_fixture():
         {
             "id": 147815167,
             "state": "EXECUTED",
-            "date": "2018-01-26T15:40:13.413061",
+            "date": "2023-01-26T15:40:13.413061",
             "operationAmount": {
                 "amount": "50870.71",
                 "currency": {
