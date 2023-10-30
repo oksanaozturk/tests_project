@@ -65,16 +65,3 @@ def change_account_or_card_format(data_of_numbers: str) -> str:
         num_cart = data_of_numbers.split(' ')[1]
         name_cart = data_of_numbers.split(' ')[0]
         return f"{name_cart} {num_cart[0:4] } {num_cart[5:7]}** **** {num_cart[-4:]}"
-
-
-if __name__ == '__main__':
-    filename = 'operations.json'
-    print(get_data(filename))
-    print(get_filter_sorted_operations(get_data(filename)))
-    print(len(get_data(filename)))
-    print(len(get_filter_sorted_operations(get_data(filename))))
-    print(change_format_date("2019-08-26T10:50:58.294041"))
-    print(change_account_or_card_format("Счет 64686473678894779589"))
-    print(change_account_or_card_format("MasterCard 7158300734726758"))
-    print(change_account_or_card_format("Visa Platinum 1246377376343588"))
-    print(change_account_or_card_format("Maestro 3928549031574026"))
