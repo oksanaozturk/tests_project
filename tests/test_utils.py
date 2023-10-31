@@ -21,10 +21,22 @@ def test_get_filter_sorted_operations(test_operations_fixture):
 
 
 def test_change_format_date(test_operations_fixture):
+    """
+    Функцмя, которая получив из фикстуры информацию,
+    проверяет работу функции change_format_date
+    :param test_operations_fixture:
+    :return: None
+    """
     assert change_format_date(get_filter_sorted_operations(test_operations_fixture)[0]['date']) == '26.01.2023'
 
 
 def test_change_account_or_card_format(test_operations_fixture):
+    """
+    Функцмя, которая получив из фикстуры информацию,
+    проверяет работу функции change_account_or_card_format
+    :param test_operations_fixture:
+    :return: None
+    """
     assert (change_account_or_card_format(get_filter_sorted_operations(test_operations_fixture)[2]['from'])
             == 'Счет ** 8655')
     assert (change_account_or_card_format(get_filter_sorted_operations(test_operations_fixture)[3]['from'])
